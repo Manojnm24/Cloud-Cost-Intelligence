@@ -101,7 +101,7 @@ function App() {
   }, [costData]);
 
   const formatCurrency = (value) =>
-    `$${value.toLocaleString(undefined, {
+    `₹${value.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;

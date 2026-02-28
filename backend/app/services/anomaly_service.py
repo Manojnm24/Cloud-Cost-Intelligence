@@ -122,7 +122,7 @@ def generate_explanation(day, previous_days):
         return (
             f"Cost spike driven by {top_service[0]} "
             f"increasing by {top_service[1]:.1f}% "
-            f"to ${top_service[2]:.2f}."
+            f"to ₹{top_service[2]:.2f}."
         )
 
     return "General cost increase detected."

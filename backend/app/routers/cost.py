@@ -32,6 +32,15 @@ def fetch_cost(days: int = 30, db: Session = Depends(get_db)):
 
     db.commit()
 
+    #if want to convert to INR before sending to frontend, can do it here before returning response
+    # USD_TO_INR = 83
+
+    # for day in data:
+    #     day["total_cost"] *= USD_TO_INR
+    #     for service in day["services"]:
+    #         service["cost"] *= USD_TO_INR
+
+    
     # Step 5: Return enriched response directly
     return [
         CostResponse(
