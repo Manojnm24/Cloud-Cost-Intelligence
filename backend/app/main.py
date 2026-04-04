@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import cost
+from app.routers import cost, auth
 from app import config
 from app.database import engine
 from app.models.cost_model import Base
+from app.models.user_model import User
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -21,6 +22,7 @@ app.add_middleware(
 Base.metadata.create_all(bind=engine)
 
 app.include_router(cost.router, prefix="/api")
+app.include_router(auth.router, prefix="/api")
 
 @app.get("/")
 def root():

@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.cost_model import Cost
+from app.models.user_model import User
+from app.security import get_current_user
 from app.services.aws_service import get_aws_cost_data
 from app.services.anomaly_service import detect_anomalies
 from app.schemas.cost_schema import CostResponse
@@ -10,7 +12,7 @@ router = APIRouter()
 
 
 @router.get("/cost", response_model=list[CostResponse])
-def fetch_cost(days: int = 30, db: Session = Depends(get_db)):
+def fetch_cost(days: int = 30, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
 
     # Step 1: Fetch AWS data
     data = get_aws_cost_data(days)
