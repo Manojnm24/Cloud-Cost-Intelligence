@@ -14,6 +14,7 @@
 - Currency formatting abstraction
 - Auto refresh support
 - CSV export support
+- JWT-based User Authentication
 - Clean modular backend architecture
 
 ## Architecture Overview
@@ -73,12 +74,15 @@ The backend fetches billing data from AWS Cost Explorer, processes it, detects a
 
 - Python
 - FastAPI
+- PostgreSQL
+- pyjwt & passlib (Authentication)
 - Boto3 (AWS SDK)
 - AWS Cost Explorer API
 
 ### Frontend
 
 - React
+- React Router
 - Recharts
 - Axios
 
@@ -116,6 +120,13 @@ cd cloud-cost-intelligence
 python -m venv venv
 venv\Scripts\activate
 ```
+### Configure Environment Variables:
+Create a `.env` file in the `backend/` directory:
+```env
+DATABASE_URL=postgresql://user:password@localhost/dbname
+SECRET_KEY=your_super_secret_key
+```
+
 ### Install dependencies:
 ```
 pip install -r requirements.txt
@@ -163,7 +174,6 @@ If daily AWS spending suddenly increases by 300% compared to baseline average:
 
 - Single AWS account integration
 - Rule-based anomaly detection (not statistical)
-- No authentication layer
 - No caching layer
 - Not production deployed
 
@@ -172,7 +182,7 @@ If daily AWS spending suddenly increases by 300% compared to baseline average:
 - Multi-account support using IAM role assumption
 - Database-backed caching layer
 - Statistical anomaly detection
-- Authentication and RBAC
+- Role-Based Access Control (RBAC)
 - Dockerized deployment
 - CI/CD pipeline
 
