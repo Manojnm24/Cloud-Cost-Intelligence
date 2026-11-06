@@ -1,6 +1,7 @@
 # Cloud-Cost-Intelligence
 
 ### A cloud cost monitoring and anomaly detection dashboard built using AWS Cost Explorer API, FastAPI, and React.
+
 ### This project provides real-time AWS billing visibility, service-level breakdown, and rule-based anomaly detection to help monitor abnormal spending patterns.
 
 ## Features
@@ -41,10 +42,11 @@ The backend fetches billing data from AWS Cost Explorer, processes it, detects a
 - Groups cost by AWS service
 - Displays total cost trend over time
 - Shows service-level cost contribution
-  
+
 2. Anomaly Detection
 
-  Implements rule-based anomaly detection:
+Implements rule-based anomaly detection:
+
 - Compares latest cost against baseline average
 - Flags abnormal percentage increases
 - Classifies severity levels
@@ -59,14 +61,15 @@ The backend fetches billing data from AWS Cost Explorer, processes it, detects a
 ## Why This Project?
 
 ### Cloud cost optimization is a real-world problem in cloud engineering and DevOps environments.
+
 ### This project demonstrates:
+
 - Practical use of AWS APIs
 - Backend data processing logic
 - Cost analytics fundamentals
 - Basic anomaly detection logic
 - API design with FastAPI
 - Data visualization using React
-
 
 ## Tech Stack
 
@@ -87,6 +90,7 @@ The backend fetches billing data from AWS Cost Explorer, processes it, detects a
 - Axios
 
 ## Project Structure
+
 ```
 backend/
   app/
@@ -116,40 +120,55 @@ cd cloud-cost-intelligence
 2. Backend Setup
 
 ### Create virtual environment:
+
 ```
 python -m venv venv
 venv\Scripts\activate
 ```
+
 ### Configure Environment Variables:
+
 Create a `.env` file in the `backend/` directory:
+
 ```env
 DATABASE_URL=postgresql://user:password@localhost/dbname
 SECRET_KEY=your_super_secret_key
 ```
 
 ### Install dependencies:
+
 ```
 pip install -r requirements.txt
 ```
+
 ### Configure AWS credentials:
+
 ```
 aws configure
 ```
+
 ### Run backend:
+
 ```
 uvicorn app.main:app --reload
 ```
+
 ### Backend runs at:
+
 ```
 http://127.0.0.1:8000
 ```
+
 3. Frontend Setup
+
 ```
 cd frontend
 npm install
 npm start
 ```
+
 ### Frontend runs at:
+
 ```
 http://localhost:3000
 ```
@@ -157,6 +176,7 @@ http://localhost:3000
 ## Example Use Case
 
 If daily AWS spending suddenly increases by 300% compared to baseline average:
+
 - System flags anomaly
 - Displays severity indicator
 - Shows service responsible

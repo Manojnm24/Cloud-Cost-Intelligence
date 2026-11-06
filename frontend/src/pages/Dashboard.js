@@ -29,7 +29,7 @@ function Dashboard() {
       setLoading(true);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://127.0.0.1:8000/api/cost?days=${days}`, {
+        `/api/cost?days=${days}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

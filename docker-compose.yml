@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: cci-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cloudcost
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: cci-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # Automatically wire to the docker db container
+      - DATABASE_URL=postgresql://user:password@db/cloudcost
+      - SECRET_KEY=your_super_secret_key
+      # To fetch AWS data you should provide your credentials 
+      # (By passing them in via `.env` file in the root when running docker-compose up)
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: cci-frontend
+    ports:
+      # Map the Nginx container port 80 to your localhost port 3000
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
